@@ -17,7 +17,7 @@ public class DefenseTurret : MonoBehaviour
 
     void Update()
     {
-        if (isBroken && playerNearby && !isRepairing && Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && !isRepairing && Keyboard.current.rKey.wasPressedThisFrame)
         {
             StartCoroutine(RepairRoutine());
         }
@@ -26,7 +26,7 @@ public class DefenseTurret : MonoBehaviour
             repairCircle.fillAmount = repairTimer / repairTime;
         }
         if (isBroken) {
-            if (playerNearby && Keyboard.current.eKey.wasPressedThisFrame)
+            if (playerNearby && Keyboard.current.rKey.wasPressedThisFrame)
             {
                 Debug.Log("DefenseTurret is broken! Repair it first.");
             }
@@ -77,7 +77,7 @@ public class DefenseTurret : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'E' to use or repair the Defense Turret!");
+            Debug.Log("Press 'E' to use or 'R' to repair the Defense Turret!");
         }
     }
 

@@ -13,7 +13,7 @@ public class RocketCapsule : MonoBehaviour
 
     void Update()
     {
-        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
         {
             StartCoroutine(RepairRoutine());
         }
@@ -29,7 +29,7 @@ public class RocketCapsule : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'E' to repair the RocketCapsule!");
+            Debug.Log("Press 'R' to repair the RocketCapsule!");
         }
     }
 

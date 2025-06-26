@@ -23,7 +23,7 @@ public class Driller : MonoBehaviour
 
     void Update()
     {
-        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
         {
             StartCoroutine(RepairRoutine());
         }
@@ -110,7 +110,7 @@ public class Driller : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'E' to repair the Driller!");
+            Debug.Log("Press 'R' to repair the Driller!");
         }
     }
 

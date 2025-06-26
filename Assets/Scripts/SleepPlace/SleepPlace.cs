@@ -15,7 +15,7 @@ public class SleepPlace : MonoBehaviour, ISleepPlace
 
     void Update()
     {
-        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
         {
             StartCoroutine(RepairRoutine());
         }
@@ -30,7 +30,7 @@ public class SleepPlace : MonoBehaviour, ISleepPlace
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'E' to repair the SleepPlace!");
+            Debug.Log("Press 'R' to repair the SleepPlace!");
         }
     }
 

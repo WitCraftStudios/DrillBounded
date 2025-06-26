@@ -35,7 +35,7 @@ public class RocketLaunchPlace : MonoBehaviour
                 cooldownTimer = 0f;
         }
 
-        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && !isRepairing && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
         {
             StartCoroutine(RepairRoutine());
         }
@@ -50,7 +50,7 @@ public class RocketLaunchPlace : MonoBehaviour
             TryLaunchRocket();
         }
 
-        if (isBroken && playerNearby && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        if (isBroken && playerNearby && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
         {
             // Already handled above
         }
@@ -62,8 +62,7 @@ public class RocketLaunchPlace : MonoBehaviour
         {
             playerNearby = true;
             playerInventory = other.GetComponent<PlayerInventory>();
-            Debug.Log("Press 'L' to launch the rocket.");
-            Debug.Log("Press 'E' to repair the RocketLaunchPlace!");
+            Debug.Log("Press 'R' to repair the RocketLaunchPlace!");
         }
     }
 

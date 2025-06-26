@@ -26,19 +26,28 @@ public class PlayerDrillerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (currentDriller != null && Keyboard.current.eKey.wasPressedThisFrame)
+        if (currentDriller != null)
         {
-            if (currentDriller.isBroken)
+            if (Keyboard.current.rKey.wasPressedThisFrame)
             {
-                currentDriller.Repair();
+                if (currentDriller.isBroken)
+                {
+                    currentDriller.Repair();
+                }
             }
-            else if (currentDriller.isRunning)
+            else if (Keyboard.current.eKey.wasPressedThisFrame)
             {
-                currentDriller.StopDriller();
-            }
-            else
-            {
-                currentDriller.StartDriller();
+                if (!currentDriller.isBroken)
+                {
+                    if (currentDriller.isRunning)
+                    {
+                        currentDriller.StopDriller();
+                    }
+                    else
+                    {
+                        currentDriller.StartDriller();
+                    }
+                }
             }
         }
     }
