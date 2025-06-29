@@ -175,7 +175,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Eat"",
                     ""type"": ""Button"",
-                    ""id"": ""8cd030b2-d58a-4b3c-b22e-5c8af52d14d8"",
+                    ""id"": ""624f0459-8cf3-42ab-993e-4238e0ea2818"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -184,7 +184,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Sleep"",
                     ""type"": ""Button"",
-                    ""id"": ""2823f9bb-1b3e-4acf-80c9-227ea7384945"",
+                    ""id"": ""55e0f458-b688-4d3c-a1d8-a384fbb0078b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -579,8 +579,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b7755584-4ffd-4c33-ac25-3a258523cc3c"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""id"": ""da25bf66-a783-436a-bc84-e0ed646db4f4"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -590,8 +590,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""86e01334-a3ec-444b-b842-aba11b5f3bcd"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""e527069d-b119-4e35-bff7-609675894c81"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -10,6 +10,7 @@ public class AsteroidMinigameManager : MonoBehaviour
     public RectTransform playArea;    // Assign the panel's RectTransform
     public RectTransform scope;       // Assign the scope RectTransform
     public RectTransform crosshair;   // Assign the crosshair RectTransform in Inspector
+    public RectTransform asteroidHolder; // Assign in Inspector
     public int minAsteroids = 15;
     public int maxAsteroids = 30;
     public AsteroidHazardManager hazardManager; // Assign in inspector
@@ -84,7 +85,7 @@ public class AsteroidMinigameManager : MonoBehaviour
             batch = Mathf.Min(batch, totalToSpawn - spawned);
             for (int i = 0; i < batch; i++)
             {
-                GameObject asteroid = Instantiate(asteroidPrefab, playArea); // parent is playArea (panel)
+                GameObject asteroid = Instantiate(asteroidPrefab, asteroidHolder); // parent is asteroidHolder
                 RectTransform rect = asteroid.GetComponent<RectTransform>();
                 // Use scope (background image) for bounds, not crosshair
                 float minY = scope.anchoredPosition.y - (scope.rect.height / 2f) + 24;

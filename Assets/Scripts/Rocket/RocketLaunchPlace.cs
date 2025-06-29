@@ -24,6 +24,7 @@ public class RocketLaunchPlace : MonoBehaviour
     private bool rocketInFlight = false;
     private int pendingBatteries = 0;
     private PlayerInventory playerInventory;
+    private PlayerInventory storedPlayerInventory; // Store reference for rocket return
 
     void Update()
     {
@@ -45,7 +46,7 @@ public class RocketLaunchPlace : MonoBehaviour
         }
 
         // Handle launch input
-        if (playerNearby && Keyboard.current.lKey.wasPressedThisFrame)
+        if (playerNearby && Keyboard.current.eKey.wasPressedThisFrame)
         {
             TryLaunchRocket();
         }
@@ -140,23 +141,26 @@ public class RocketLaunchPlace : MonoBehaviour
         // Launch upward (or use your desired direction)
         flight.Launch(launchPoint.up, OnRocketReturn);
 
+        // Store the player inventory reference for rocket return
+        storedPlayerInventory = playerInventory;
+
         Debug.Log("Rocket launched to HQ!");
     }
 
     void OnRocketReturn()
     {
-        int reward = pendingBatteries * currencyPerBattery;
-        if (playerInventory != null)
+        if (storedPlayerInventory != null)
         {
-            playerInventory.AddCurrency(reward);
-            Debug.Log("Rocket returned! Delivered " + pendingBatteries + " batteries to HQ! Earned " + reward + " currency.");
+            storedPlayerInventory.AddOxygenCylinders(1);
+            Debug.Log("Rocket returned! Delivered " + pendingBatteries + " batteries to HQ! Received 1 oxygen cylinder.");
         }
         else
         {
-            Debug.Log("Rocket returned, but no player inventory found to grant reward.");
+            Debug.Log("Rocket returned, but no stored player inventory found to grant reward.");
         }
         rocketInFlight = false;
         pendingBatteries = 0;
+        storedPlayerInventory = null; // Clear stored reference
     }
 
     public void BreakDown()

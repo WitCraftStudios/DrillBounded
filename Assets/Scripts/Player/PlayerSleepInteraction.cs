@@ -6,45 +6,71 @@ public class PlayerSleepInteraction : MonoBehaviour
 {
     private ISleepPlace currentSleepPlace;
     public PlayerEnergy playerEnergy;
-    private InputSystem_Actions inputActions;
     public FadeUI fadeUI; // Assign in inspector
     public float sleepFadeDuration = 1f;
     public float sleepTime = 2f; // In-game hours to skip (can be used for time system)
+    public PlayerInventory playerInventory; // Assign in inspector
 
-    void Awake()
+    private InputSystem_Actions inputActions;
+
+    private void Awake()
     {
         inputActions = new InputSystem_Actions();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        inputActions.Enable();
+        inputActions.Player.Enable();
         inputActions.Player.Sleep.performed += OnSleep;
         inputActions.Player.Eat.performed += OnEat;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         inputActions.Player.Sleep.performed -= OnSleep;
         inputActions.Player.Eat.performed -= OnEat;
-        inputActions.Disable();
+        inputActions.Player.Disable();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        currentSleepPlace = other.GetComponent<ISleepPlace>();
-        if (currentSleepPlace != null)
+        if (inputActions.Player.Interact.triggered)
         {
-            Debug.Log("You can sleep or eat here! Press the assigned keys.");
-            // Optionally, show UI prompt
+            Debug.Log("Interact action triggered in Update!");
+            Debug.Log("currentSleepPlace: " + currentSleepPlace);
+            if (currentSleepPlace != null)
+            {
+                Debug.Log("currentSleepPlace is not null in Update.");
+            }
+            else
+            {
+                Debug.Log("currentSleepPlace is null in Update.");
+            }
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"OnTriggerEnter called with: {other.name}, tag: {other.tag}");
+        currentSleepPlace = other.GetComponent<ISleepPlace>();
+        if (currentSleepPlace != null)
+        {
+            Debug.Log("You can sleep here! Press the assigned key.");
+            // Optionally, show UI prompt
+        }
+        else
+        {
+            Debug.Log("ISleepPlace not found on collider.");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log($"OnTriggerExit called with: {other.name}, tag: {other.tag}");
         if (other.GetComponent<ISleepPlace>() == currentSleepPlace)
         {
             currentSleepPlace = null;
+            Debug.Log("Left sleep place trigger. currentSleepPlace set to null.");
             // Optionally, hide UI prompt
         }
     }
@@ -57,8 +83,18 @@ public class PlayerSleepInteraction : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator SleepSequence()
+    private IEnumerator SleepSequence()
     {
+        if (playerInventory == null || !playerInventory.SpendOxygenCylinder())
+        {
+            Debug.Log("Cannot sleep: No oxygen cylinders available!");
+            yield break;
+        }
+        if (currentSleepPlace is SleepPlace sleepPlace && sleepPlace.isBroken)
+        {
+            Debug.Log("Cannot sleep: SleepPlace is broken!");
+            yield break;
+        }
         if (fadeUI != null)
         {
             fadeUI.fadeDuration = sleepFadeDuration;

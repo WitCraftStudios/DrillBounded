@@ -9,6 +9,7 @@ TagManager:
   - DefenceTurret
   - Asteroid
   - Ground
+  - SleepPlace
   layers:
   - Default
   - TransparentFX

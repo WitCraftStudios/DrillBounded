@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SleepPlace : MonoBehaviour, ISleepPlace
 {
@@ -30,7 +31,15 @@ public class SleepPlace : MonoBehaviour, ISleepPlace
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'R' to repair the SleepPlace!");
+            Debug.Log("Press 'E' to sleep or 'R' to repair the SleepPlace!");
+            // Show interaction prompt
+            if (InteractionPromptUI.Instance != null)
+            {
+                InteractionPromptUI.Instance.ShowPrompt(new List<(string, string)>{
+                    ("E", "Sleep"),
+                    ("R", "Repair")
+                });
+            }
         }
     }
 
@@ -39,6 +48,11 @@ public class SleepPlace : MonoBehaviour, ISleepPlace
         if (other.CompareTag("Player"))
         {
             playerNearby = false;
+            // Hide interaction prompt
+            if (InteractionPromptUI.Instance != null)
+            {
+                InteractionPromptUI.Instance.HidePrompt();
+            }
         }
     }
 
