@@ -9,8 +9,7 @@ public class AsteroidHazardManager : MonoBehaviour
     public float attackInterval = 30f; // Time between attacks
 
     [Header("UI")]
-    public GameObject warningSignUI; // The icon
-    public GameObject warningTextUI; // The text
+    public GameObject warningPanel;
 
     private GameObject activeAsteroid = null;
     private float timer = 0f;
@@ -30,8 +29,7 @@ public class AsteroidHazardManager : MonoBehaviour
     void SpawnAsteroid()
     {
         if (groundTarget == null) return;
-        if (warningSignUI != null) warningSignUI.SetActive(true);
-        if (warningTextUI != null) warningTextUI.SetActive(true);
+        if (warningPanel != null) warningPanel.SetActive(true);
         Vector3 spawnPos = groundTarget.position + Vector3.up * spawnHeight;
         activeAsteroid = Instantiate(asteroidPrefab, spawnPos, Quaternion.identity);
         AsteroidHazard hazard = activeAsteroid.GetComponent<AsteroidHazard>();
@@ -50,8 +48,7 @@ public class AsteroidHazardManager : MonoBehaviour
             Destroy(activeAsteroid);
             activeAsteroid = null;
         }
-        if (warningSignUI != null) warningSignUI.SetActive(false);
-        if (warningTextUI != null) warningTextUI.SetActive(false);
+        if (warningPanel != null) warningPanel.SetActive(false);
     }
 
     public bool IsHazardActive()
