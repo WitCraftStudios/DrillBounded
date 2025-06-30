@@ -4,14 +4,14 @@ using UnityEngine.InputSystem;
 public class PlayerDrillerInteraction : MonoBehaviour
 {
     private Driller currentDriller;
+    public GameObject interactionPrompt;
 
     void OnTriggerEnter(Collider other)
     {
         currentDriller = other.GetComponent<Driller>();
         if (currentDriller != null)
         {
-            Debug.Log("Press 'E' to interact with the driller.");
-            // Optionally, show UI prompt
+            interactionPrompt.SetActive(true);
         }
     }
 
@@ -20,7 +20,7 @@ public class PlayerDrillerInteraction : MonoBehaviour
         if (other.GetComponent<Driller>() == currentDriller)
         {
             currentDriller = null;
-            // Optionally, hide UI prompt
+            interactionPrompt.SetActive(false);
         }
     }
 

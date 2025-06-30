@@ -10,6 +10,23 @@ public class TurretShooter : MonoBehaviour
 
     private float timer = 0f;
     private bool isBursting = false;
+    public GameObject interactionPrompt;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            interactionPrompt.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            interactionPrompt.SetActive(false);
+        }
+    }
 
     void Update()
     {

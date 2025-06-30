@@ -10,6 +10,7 @@ public class PlayerSleepInteraction : MonoBehaviour
     public float sleepFadeDuration = 1f;
     public float sleepTime = 2f; // In-game hours to skip (can be used for time system)
     public PlayerInventory playerInventory; // Assign in inspector
+    public GameObject interactionPrompt;
 
     private InputSystem_Actions inputActions;
 
@@ -51,12 +52,10 @@ public class PlayerSleepInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"OnTriggerEnter called with: {other.name}, tag: {other.tag}");
         currentSleepPlace = other.GetComponent<ISleepPlace>();
         if (currentSleepPlace != null)
         {
-            Debug.Log("You can sleep here! Press the assigned key.");
-            // Optionally, show UI prompt
+            interactionPrompt.SetActive(true);
         }
         else
         {
@@ -70,8 +69,7 @@ public class PlayerSleepInteraction : MonoBehaviour
         if (other.GetComponent<ISleepPlace>() == currentSleepPlace)
         {
             currentSleepPlace = null;
-            Debug.Log("Left sleep place trigger. currentSleepPlace set to null.");
-            // Optionally, hide UI prompt
+            interactionPrompt.SetActive(false);
         }
     }
 
@@ -99,6 +97,7 @@ public class PlayerSleepInteraction : MonoBehaviour
         {
             fadeUI.fadeDuration = sleepFadeDuration;
             fadeUI.FadeOut();
+            interactionPrompt.SetActive(false);
             yield return new WaitForSecondsRealtime(sleepFadeDuration);
         }
         currentSleepPlace.Sleep(playerEnergy);
@@ -106,6 +105,7 @@ public class PlayerSleepInteraction : MonoBehaviour
         if (fadeUI != null)
         {
             fadeUI.FadeIn();
+            interactionPrompt.SetActive(true);
             yield return new WaitForSecondsRealtime(sleepFadeDuration);
         }
     }

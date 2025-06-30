@@ -14,6 +14,7 @@ public class DefenseTurret : MonoBehaviour
     private bool playerNearby = false;
     private bool isRepairing = false;
     private float repairTimer = 0f;
+    public GameObject interactionPrompt;
 
     void Update()
     {
@@ -77,7 +78,7 @@ public class DefenseTurret : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Press 'E' to use or 'R' to repair the Defense Turret!");
+            interactionPrompt.SetActive(true);
         }
     }
 
@@ -86,6 +87,7 @@ public class DefenseTurret : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = false;
+            interactionPrompt.SetActive(false);
         }
     }
 

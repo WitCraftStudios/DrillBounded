@@ -25,6 +25,7 @@ public class RocketLaunchPlace : MonoBehaviour
     private int pendingBatteries = 0;
     private PlayerInventory playerInventory;
     private PlayerInventory storedPlayerInventory; // Store reference for rocket return
+    public GameObject interactionPrompt;
 
     void Update()
     {
@@ -51,10 +52,6 @@ public class RocketLaunchPlace : MonoBehaviour
             TryLaunchRocket();
         }
 
-        if (isBroken && playerNearby && UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            // Already handled above
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -63,7 +60,7 @@ public class RocketLaunchPlace : MonoBehaviour
         {
             playerNearby = true;
             playerInventory = other.GetComponent<PlayerInventory>();
-            Debug.Log("Press 'R' to repair the RocketLaunchPlace!");
+            interactionPrompt.SetActive(true);
         }
     }
 
@@ -73,6 +70,7 @@ public class RocketLaunchPlace : MonoBehaviour
         {
             playerNearby = false;
             playerInventory = null;
+            interactionPrompt.SetActive(false);
         }
     }
 
